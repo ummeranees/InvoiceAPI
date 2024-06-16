@@ -18,29 +18,64 @@ namespace InvoiceAPI.BP
 
         public List<Customer> GetAll()
         {
-            return _customerRepository.GetAll();
+            try
+            {
+                return _customerRepository.GetAll();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public Customer Get(int id)
         {
-            return _customerRepository.Get(id);
+            try
+            {
+                return _customerRepository.Get(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public void Add(Customer customer)
         {
-            _customerRepository.Add(customer);
+            try
+            {
+                _customerRepository.Add(customer);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
         }
 
         public void Update(int id, Customer updatedCustomer)
         {
-            _customerRepository.Update(id, updatedCustomer);
+            try
+            {
+                _customerRepository.Update(id, updatedCustomer);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
         }
 
         public void Delete(int id)
         {
-            _customerRepository.Delete(id);
+            try
+            {
+                _customerRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
         }
 

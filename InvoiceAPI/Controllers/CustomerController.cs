@@ -25,44 +25,79 @@ namespace InvoiceAPI.Controllers
         [HttpGet]
         public ActionResult<List<Customer>> GetCustomers()
         {
-            return Ok(_customerService.GetAll());
+            try
+            {
+                return Ok(_customerService.GetAll());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
         public ActionResult<Customer> GetCustomer(int id)
         {
-            var customer = _customerService.Get(id);
-            if (customer == null)
-                return NotFound();
+            try
+            {
+                var customer = _customerService.Get(id);
+                if (customer == null)
+                    return NotFound();
 
-            return Ok(customer);
+                return Ok(customer);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost]
         public ActionResult AddCustomer([FromBody] Customer customer)
         {
-            _customerService.Add(customer);
-            return Ok();
+            try
+            {
+                _customerService.Add(customer);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateCustomer(int id, [FromBody] Customer customer)
         {
-            if (_customerService.Get(id) == null)
-                return NotFound();
+            try
+            {
+                if (_customerService.Get(id) == null)
+                    return NotFound();
 
-            _customerService.Update(id, customer);
-            return Ok();
+                _customerService.Update(id, customer);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteCustomer(int id)
         {
-            if (_customerService.Get(id) == null)
-                return NotFound();
+            try
+            {
+                if (_customerService.Get(id) == null)
+                    return NotFound();
 
-            _customerService.Delete(id);
-            return Ok();
+                _customerService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

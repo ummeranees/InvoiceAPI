@@ -21,44 +21,79 @@ namespace InvoiceAPI.Controllers
         [HttpGet]
         public ActionResult<List<Category>> GetAll()
         {
-            return Ok(_categoryService.GetAll());
+            try
+            {
+                return Ok(_categoryService.GetAll());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
         public ActionResult<Category> GetCategory(int id)
         {
-            var category = _categoryService.Get(id);
-            if (category == null)
-                return NotFound();
+            try
+            {
+                var category = _categoryService.Get(id);
+                if (category == null)
+                    return NotFound();
 
-            return Ok(category);
+                return Ok(category);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost]
         public ActionResult AddCategory([FromBody]Category category)
         {
-            _categoryService.Add(category);
-            return Ok();
+            try
+            {
+                _categoryService.Add(category);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateCategory(int id, [FromBody]Category category)
         {
-            if (_categoryService.Get(id) == null)
-                return NotFound();
+            try
+            {
+                if (_categoryService.Get(id) == null)
+                    return NotFound();
 
-            _categoryService.Update(id, category);
-            return Ok();
+                _categoryService.Update(id, category);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(int id)
         {
-            if (_categoryService.Get(id) == null)
-                return NotFound();
+            try
+            {
+                if (_categoryService.Get(id) == null)
+                    return NotFound();
 
-            _categoryService.Delete(id);
-            return Ok();
+                _categoryService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
     }

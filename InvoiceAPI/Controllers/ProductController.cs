@@ -24,44 +24,79 @@ namespace InvoiceAPI.Controllers
         [Produces("application/json")]
         public ActionResult<List<Product>> GetProducts()
         {
-            return Ok(_productService.GetAll());
+            try
+            {
+                return Ok(_productService.GetAll());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
         public ActionResult<Product> GetProduct(int id)
         {
-            var product = _productService.Get(id);
-            if (product == null)
-                return NotFound();
+            try
+            {
+                var product = _productService.Get(id);
+                if (product == null)
+                    return NotFound();
 
-            return Ok(product);
+                return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost]
         public ActionResult AddProduct([FromBody] Product product)
         {
-            _productService.Add(product);
-            return Ok();
+            try
+            {
+                _productService.Add(product);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateProduct(int id, [FromBody] Product product)
         {
-            if (_productService.Get(id) == null)
-                return NotFound();
+            try
+            {
+                if (_productService.Get(id) == null)
+                    return NotFound();
 
-            _productService.Update(id, product);
-            return Ok();
+                _productService.Update(id, product);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(int id)
         {
-            if (_productService.Get(id) == null)
-                return NotFound();
+            try
+            {
+                if (_productService.Get(id) == null)
+                    return NotFound();
 
-            _productService.Delete(id);
-            return Ok();
+                _productService.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

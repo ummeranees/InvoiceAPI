@@ -23,24 +23,45 @@ namespace InvoiceAPI.Controllers
         [HttpGet]
         public ActionResult<List<Invoice>> GetInvoices()
         {
-            return Ok(_invoiceService.GetAll());
+            try
+            {
+                return Ok(_invoiceService.GetAll());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet("{id}")]
         public ActionResult<Invoice> GetInvoice(int id)
         {
-            var invoice = _invoiceService.Get(id);
-            if (invoice == null)
-                return NotFound();
+            try
+            {
+                var invoice = _invoiceService.Get(id);
+                if (invoice == null)
+                    return NotFound();
 
-            return Ok(invoice);
+                return Ok(invoice);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost]
         public ActionResult<Invoice> GenerateInvoice([FromBody] Invoicerequest invoice)
         {
-            Invoice result = _invoiceService.Add(invoice);
-            return Ok(result);
+            try
+            {
+                Invoice result = _invoiceService.Add(invoice);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 

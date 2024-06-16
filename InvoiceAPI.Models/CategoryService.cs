@@ -22,31 +22,66 @@ namespace InvoiceAPI.BP
 
         public List<Category> GetAll()
         {
-            var result = _categoryRepository.GetAll();
-            return result;
+            try
+            {
+                var result = _categoryRepository.GetAll();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ;
+            }
         }
 
         public Category Get(int id)
         {
-            return _categoryRepository.Get(id);
+            try
+            {
+                return _categoryRepository.Get(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public void Add(Category category)
         {
-            _categoryRepository.Add(category);
+            try
+            {
+                _categoryRepository.Add(category);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
         }
 
         public void Update(int id, Category updatedCategory)
         {
-            _categoryRepository.Update(id, updatedCategory);
+            try
+            {
+                _categoryRepository.Update(id, updatedCategory);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
         }
 
         public void Delete(int id)
         {
-            _categoryRepository.Delete(id);
-            
+            try
+            {
+                _categoryRepository.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         //private List<Category> ReadFromFile()

@@ -23,45 +23,80 @@ namespace InvoiceAPI.BP
 
         public List<Product> GetAll()
         {
-            return ReadFromFile();
+            try
+            {
+                return ReadFromFile();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public Product Get(int id)
         {
-            return ReadFromFile().FirstOrDefault(p => p.Id == id);
+            try
+            {
+                return ReadFromFile().FirstOrDefault(p => p.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public void Add(Product product)
         {
-            var products = ReadFromFile();
-            product.Id = products.Count > 0 ? products.Max(p => p.Id) + 1 : 1;
-            products.Add(product);
-            WriteToFile(products);
+            try
+            {
+                var products = ReadFromFile();
+                product.Id = products.Count > 0 ? products.Max(p => p.Id) + 1 : 1;
+                products.Add(product);
+                WriteToFile(products);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public void Update(int id, Product updatedProduct)
         {
-            var products = ReadFromFile();
-            var product = products.FirstOrDefault(p => p.Id == id);
-            if (product != null)
+            try
             {
-                product.Name = updatedProduct.Name;
-                product.Description = updatedProduct.Description;
-                product.Price = updatedProduct.Price;
-                product.Quantity = updatedProduct.Quantity;
-                product.CategoryId = updatedProduct.CategoryId;
-                WriteToFile(products);
+                var products = ReadFromFile();
+                var product = products.FirstOrDefault(p => p.Id == id);
+                if (product != null)
+                {
+                    product.Name = updatedProduct.Name;
+                    product.Description = updatedProduct.Description;
+                    product.Price = updatedProduct.Price;
+                    product.Quantity = updatedProduct.Quantity;
+                    product.CategoryId = updatedProduct.CategoryId;
+                    WriteToFile(products);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 
         public void Delete(int id)
         {
-            var products = ReadFromFile();
-            var product = products.FirstOrDefault(p => p.Id == id);
-            if (product != null)
+            try
             {
-                products.Remove(product);
-                WriteToFile(products);
+                var products = ReadFromFile();
+                var product = products.FirstOrDefault(p => p.Id == id);
+                if (product != null)
+                {
+                    products.Remove(product);
+                    WriteToFile(products);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 
