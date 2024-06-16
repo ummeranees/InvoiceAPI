@@ -27,7 +27,7 @@ namespace InvoiceAPI.BP
             _customerService = customerService;
         }
 
-        public void Add(Invoicerequest invoice)
+        public Invoice Add(Invoicerequest invoice)
         {
             Invoice invoice1 = new Invoice();
             invoice1 = CalculateInvoice(invoice);
@@ -41,6 +41,7 @@ namespace InvoiceAPI.BP
             }
             lines.Add(invoiceData);
             File.WriteAllLines(_filePath, lines);
+            return invoice1;
             //_customerService.Add(invoice1.Customer);
         }
 

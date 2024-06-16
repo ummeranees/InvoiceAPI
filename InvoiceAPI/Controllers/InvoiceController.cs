@@ -37,10 +37,10 @@ namespace InvoiceAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult GenerateInvoice([FromBody] Invoicerequest invoice)
+        public ActionResult<Invoice> GenerateInvoice([FromBody] Invoicerequest invoice)
         {
-            _invoiceService.Add(invoice);
-            return Ok();
+            Invoice result = _invoiceService.Add(invoice);
+            return Ok(result);
         }
     }
 

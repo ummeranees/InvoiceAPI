@@ -11,6 +11,6 @@ namespace InvoiceAPI.BP.Interface
     {
         List<Invoice> GetAll();
         Invoice Get(int id);
-        void Add(Invoicerequest invoice);
+        Invoice Add(Invoicerequest invoice);
     }
 }
