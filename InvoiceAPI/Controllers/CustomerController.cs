@@ -27,6 +27,10 @@ namespace InvoiceAPI.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 return Ok(_customerService.GetAll());
             }
             catch (Exception ex)
@@ -40,6 +44,10 @@ namespace InvoiceAPI.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 var customer = _customerService.Get(id);
                 if (customer == null)
                     return NotFound();
@@ -57,6 +65,10 @@ namespace InvoiceAPI.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 _customerService.Add(customer);
                 return Ok();
             }
@@ -71,6 +83,10 @@ namespace InvoiceAPI.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 if (_customerService.Get(id) == null)
                     return NotFound();
 
@@ -88,6 +104,10 @@ namespace InvoiceAPI.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 if (_customerService.Get(id) == null)
                     return NotFound();
 
